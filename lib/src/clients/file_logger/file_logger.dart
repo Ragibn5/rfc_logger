@@ -98,6 +98,6 @@ class FileLogger extends LoggerClientBase {
   String _getLogFileName(DateTime time) {
     return "${_logFileConfig.fileNamePrefix}"
         "${_logFileConfig.nameDateFormat.format(time)}"
-        "${_logFileConfig.fileNamePrefix}";
+        "${_logFileConfig.fileNameSuffix}";
   }
 }

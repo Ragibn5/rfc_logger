@@ -17,9 +17,6 @@ dependencies:
   # intl
   intl: ^0.18.0
 
-  # dartz
-  dartz: ^0.10.1
-
   # custom dependencies
   # ...
 
