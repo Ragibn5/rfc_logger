@@ -34,14 +34,15 @@ class CompositeLogger {
     log(LogLevel.error, message);
   }
 
-  void logException(
-      {required dynamic exception,
-      String? prefixMessage,
-      StackTrace? stackTrace}) {
+  void logException({
+    required dynamic exception,
+    String? prefixMessage,
+    StackTrace? stackTrace,
+  }) {
     log(
       LogLevel.error,
       "${prefixMessage != null ? "$prefixMessage -> " : ""}${exception.toString()}"
-      "${stackTrace != null ? "\ns${stackTrace.toString()}\n\n" : "Stack trace unavailable"}",
+      "${stackTrace != null ? "\n${stackTrace.toString()}\n\n" : " -> Stack trace unavailable"}",
     );
   }
 
