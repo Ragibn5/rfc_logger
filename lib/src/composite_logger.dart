@@ -1,9 +1,9 @@
 import 'clients/console_logger/console_logger.dart';
 import 'clients/file_logger/file_logger.dart';
+import 'clients/logger_client_base.dart';
+import 'constants/log_level.dart';
 import 'formatters/log_formatter.dart';
 import 'formatters/log_formatter_base.dart';
-import 'constants/log_level.dart';
-import 'clients/logger_client_base.dart';
 
 /// A composite logger that writes logs to multiple log clients.
 /// - The library ships with two ready-made log client, [ConsoleLogger] and [FileLogger].
@@ -15,7 +15,8 @@ import 'clients/logger_client_base.dart';
 class CompositeLogger {
   final List<LoggerClientBase> _loggers;
 
-  CompositeLogger({required List<LoggerClientBase> loggers}) : _loggers = loggers;
+  CompositeLogger({required List<LoggerClientBase> loggers})
+      : _loggers = loggers;
 
   void logDebug(String message) {
     log(LogLevel.debug, message);
@@ -33,11 +34,15 @@ class CompositeLogger {
     log(LogLevel.error, message);
   }
 
-  void logException({required dynamic exception, String? prefixMessage, StackTrace? stackTrace}) {
+  void logException({
+    required dynamic exception,
+    String? prefixMessage,
+    StackTrace? stackTrace,
+  }) {
     log(
       LogLevel.error,
       "${prefixMessage != null ? "$prefixMessage -> " : ""}${exception.toString()}"
-      "${stackTrace != null ? "||\ns${stackTrace.toString()}\n||\n" : "Stack trace unavailable"}",
+      "${stackTrace != null ? "\n${stackTrace.toString()}\n\n" : " -> Stack trace unavailable"}",
     );
   }
 
