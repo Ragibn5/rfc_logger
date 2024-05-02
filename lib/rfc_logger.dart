@@ -8,3 +8,4 @@ export 'src/composite_logger.dart';
 export 'src/constants/log_level.dart';
 export 'src/formatters/log_formatter.dart';
 export 'src/formatters/log_formatter_base.dart';
+export 'src/models/log_data.dart';
