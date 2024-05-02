@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-import '../../constants/log_level.dart';
 import '../../formatters/log_formatter.dart';
 import '../../models/log_data.dart';
 import '../logger_client_base.dart';
@@ -26,9 +25,9 @@ class FileLogger extends LoggerClientBase {
         super(logFormatter: formatter);
 
   @override
-  void log(DateTime time, LogLevel level, String message) async {
+  void log(LogData logData) async {
     // add to queue
-    _logQueue.addLast(LogData(time, level, message));
+    _logQueue.addLast(logData);
 
     // schedule batch log
     await _batchLogInternal();
@@ -55,11 +54,7 @@ class FileLogger extends LoggerClientBase {
     return logFile != null &&
         await _appendToLogFile(
           logFile,
-          logFormatter.getFormattedMessage(
-            newLogData.time,
-            newLogData.level,
-            newLogData.message,
-          ),
+          logFormatter.getFormattedLog(newLogData),
         );
   }
 

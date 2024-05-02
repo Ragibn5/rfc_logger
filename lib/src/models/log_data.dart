@@ -3,7 +3,7 @@ import '../constants/log_level.dart';
 class LogData {
   final DateTime time;
   final LogLevel level;
-  final String message;
+  final dynamic message;
 
   LogData(
     this.time,

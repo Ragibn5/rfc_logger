@@ -1,5 +1,9 @@
-import '../formatters/log_formatter_base.dart';
+import 'dart:convert';
+
+import 'package:rfc_logger/src/models/log_data.dart';
+
 import '../constants/log_level.dart';
+import '../formatters/log_formatter_base.dart';
 
 class LogFormatter extends LogFormatterBase {
   LogFormatter({required super.stampFormat});
@@ -24,7 +28,17 @@ class LogFormatter extends LogFormatterBase {
   }
 
   @override
-  String getFormattedMessage(DateTime time, LogLevel level, String message) {
-    return "[${getLogStamp(time)}] [${getLogLevelIndicatorString(level)}] : $message";
+  String getFormattedMessage(dynamic message) {
+    return JsonEncoder.withIndent(
+      "    ",
+      (unEncodableValue) => unEncodableValue.toString(),
+    ).convert(message);
+  }
+
+  @override
+  String getFormattedLog(LogData logData) {
+    return "[${getLogStamp(logData.time)}] "
+        "[${getLogLevelIndicatorString(logData.level)}] : "
+        "${getFormattedMessage(logData.message)}";
   }
 }

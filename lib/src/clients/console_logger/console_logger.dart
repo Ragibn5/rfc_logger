@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:rfc_logger/src/models/log_data.dart';
 
-import '../../constants/log_level.dart';
 import '../../formatters/log_formatter.dart';
 import '../logger_client_base.dart';
 
@@ -9,7 +9,7 @@ class ConsoleLogger extends LoggerClientBase {
       : super(logFormatter: logFormatter);
 
   @override
-  void log(DateTime time, LogLevel level, String message) {
-    debugPrint(logFormatter.getFormattedMessage(time, level, message));
+  void log(LogData logData) {
+    debugPrint(logFormatter.getFormattedLog(logData));
   }
 }
