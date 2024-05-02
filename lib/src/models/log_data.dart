@@ -3,13 +3,13 @@ import '../constants/log_level.dart';
 class LogData {
   final DateTime time;
   final LogLevel level;
-  final String? header;
+  final String message;
   final dynamic data;
 
   LogData(
     this.time,
     this.level,
-    this.header,
+    this.message,
     this.data,
   );
 }

@@ -17,7 +17,7 @@ abstract class LogFormatterBase {
   String getLogLevelIndicatorString(LogLevel logLevel);
 
   @protected
-  String getFormattedMessage(dynamic message);
+  String? getFormattedData(dynamic data);
 
   @protected
   String getFormattedLog(LogData logData);

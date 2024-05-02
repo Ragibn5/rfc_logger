@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:rfc_logger/src/models/log_data.dart';
 
 import 'clients/console_logger/console_logger.dart';
@@ -29,42 +31,44 @@ class CompositeLogger {
   })  : _loggers = loggers,
         _enabledLevelsMap = _buildLevelMap(logLevels);
 
-  void logDebug(dynamic message, {String? header}) {
-    log(LogLevel.debug, header: header, data: message);
+  void logDebug(String message, {dynamic data}) {
+    log(LogLevel.debug, message: message, data: data);
   }
 
-  void logInfo(dynamic message, {String? header}) {
-    log(LogLevel.info, header: header, data: message);
+  void logInfo(String message, {dynamic data}) {
+    log(LogLevel.info, message: message, data: data);
   }
 
-  void logWarning(dynamic message, {String? header}) {
-    log(LogLevel.warning, header: header, data: message);
+  void logWarning(String message, {dynamic data}) {
+    log(LogLevel.warning, message: message, data: data);
   }
 
-  void logError(dynamic message, {String? header}) {
-    log(LogLevel.error, header: header, data: message);
+  void logError(String message, {dynamic data}) {
+    log(LogLevel.error, message: message, data: data);
   }
 
-  void logException({
-    String? header,
+  void logException(
+    String message, {
+    dynamic exception,
     StackTrace? stackTrace,
-    required dynamic exception,
   }) {
-    log(
-      LogLevel.error,
-      header: header,
-      data: exception,
-    );
+    log(LogLevel.error,
+        message: "$message${Platform.isWindows ? "\n\r" : "\n"}$stackTrace'",
+        data: exception);
   }
 
-  void log(LogLevel logLevel, {String? header, required dynamic data}) {
+  void log(
+    LogLevel logLevel, {
+    required String message,
+    dynamic data,
+  }) {
     if (_enabledLevelsMap[logLevel] == false) return;
     for (int i = 0; i < _loggers.length; ++i) {
       _loggers[i].log(
         LogData(
           DateTime.now(),
           logLevel,
-          header,
+          message,
           data,
         ),
       );
