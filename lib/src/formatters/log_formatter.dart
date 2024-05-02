@@ -53,7 +53,7 @@ class LogFormatter extends LogFormatterBase {
     return "[${getLogStamp(logData.time)}] - "
         "[${getLogLevelIndicatorString(logData.level)}] ➜ "
         "${msg.contains(ls) ? "$ls$msg" : msg}"
-        "${extra != null ? (extra.contains(ls) ? "$ls$extra$ls" : extra) : "$ls"}";
+        "${extra != null ? (extra.contains(ls) ? "$ls$extra$ls" : extra) : ls}";
   }
 
   String _getPlatformLineSeparator() {
