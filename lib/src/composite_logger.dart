@@ -85,5 +85,6 @@ class CompositeLogger {
     for (final element in logLevels) {
       enabledLevelMap[element] = true;
     }
+    return enabledLevelMap;
   }
 }
