@@ -39,6 +39,7 @@ class LogFormatter extends LogFormatterBase {
   String getFormattedLog(LogData logData) {
     return "[${getLogStamp(logData.time)}] "
         "[${getLogLevelIndicatorString(logData.level)}] : "
-        "${getFormattedMessage(logData.message)}";
+        "${logData.header != null ? "${logData.header}\n" : ""}"
+        "${getFormattedMessage(logData.data)}";
   }
 }

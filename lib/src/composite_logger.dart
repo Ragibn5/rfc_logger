@@ -29,41 +29,42 @@ class CompositeLogger {
   })  : _loggers = loggers,
         _enabledLevelsMap = _buildLevelMap(logLevels);
 
-  void logDebug(dynamic message) {
-    log(LogLevel.debug, message);
+  void logDebug(dynamic message, {String? header}) {
+    log(LogLevel.debug, header: header, data: message);
   }
 
-  void logInfo(dynamic message) {
-    log(LogLevel.info, message);
+  void logInfo(dynamic message, {String? header}) {
+    log(LogLevel.info, header: header, data: message);
   }
 
-  void logWarning(dynamic message) {
-    log(LogLevel.warning, message);
+  void logWarning(dynamic message, {String? header}) {
+    log(LogLevel.warning, header: header, data: message);
   }
 
-  void logError(dynamic message) {
-    log(LogLevel.error, message);
+  void logError(dynamic message, {String? header}) {
+    log(LogLevel.error, header: header, data: message);
   }
 
   void logException({
-    required String message,
-    StackTrace? stackTrace,
+    String? header,
+    required dynamic exception,
   }) {
     log(
       LogLevel.error,
-      "$message"
-      "${stackTrace != null ? "\n${stackTrace.toString()}" : " -> Stack trace unavailable"}",
+      header: header,
+      data: exception,
     );
   }
 
-  void log(LogLevel logLevel, dynamic message) {
+  void log(LogLevel logLevel, {String? header, required dynamic data}) {
     if (_enabledLevelsMap[logLevel] == false) return;
     for (int i = 0; i < _loggers.length; ++i) {
       _loggers[i].log(
         LogData(
           DateTime.now(),
           logLevel,
-          message,
+          header,
+          data,
         ),
       );
     }
