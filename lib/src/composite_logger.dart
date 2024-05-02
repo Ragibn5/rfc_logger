@@ -47,6 +47,7 @@ class CompositeLogger {
 
   void logException({
     String? header,
+    StackTrace? stackTrace,
     required dynamic exception,
   }) {
     log(
