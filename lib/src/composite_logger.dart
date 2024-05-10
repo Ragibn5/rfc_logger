@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:rfc_logger/src/constants/platform_constants.dart';
 import 'package:rfc_logger/src/models/log_data.dart';
 
 import 'clients/console_logger/console_logger.dart';
@@ -52,9 +51,11 @@ class CompositeLogger {
     dynamic exception,
     StackTrace? stackTrace,
   }) {
-    log(LogLevel.error,
-        message: "$message${Platform.isWindows ? "\n\r" : "\n"}$stackTrace'",
-        data: exception);
+    log(
+      LogLevel.error,
+      message: message,
+      data: "$exception${PlatformConstants.newLine}$stackTrace",
+    );
   }
 
   void log(

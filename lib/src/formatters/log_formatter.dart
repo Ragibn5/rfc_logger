@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:rfc_logger/src/constants/platform_constants.dart';
 import 'package:rfc_logger/src/models/log_data.dart';
 
 import '../constants/log_level.dart';
@@ -42,7 +42,7 @@ class LogFormatter extends LogFormatterBase {
 
   @override
   String getFormattedLog(LogData logData) {
-    final ls = _getPlatformLineSeparator();
+    final ls = PlatformConstants.newLine;
 
     var msg = logData.message.trim();
     msg = (msg.isNotEmpty ? msg : "N/A");
@@ -52,11 +52,7 @@ class LogFormatter extends LogFormatterBase {
 
     return "[${getLogStamp(logData.time)}] - "
         "[${getLogLevelIndicatorString(logData.level)}] ➜ "
-        "${msg.contains(ls) ? "$ls$msg" : msg}"
-        "${extra != null ? (extra.contains(ls) ? "$ls$extra$ls" : extra) : ls}";
-  }
-
-  String _getPlatformLineSeparator() {
-    return Platform.isWindows ? "\n\r" : "\n";
+        "${msg.contains(ls) ? "$ls$msg$ls" : "$msg$ls"}"
+        "${extra != null ? "$extra$ls" : ""}";
   }
 }
