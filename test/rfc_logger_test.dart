@@ -12,5 +12,5 @@ CompositeLogger getDefaultLogger() {
   LogFormatter logFormatter = LogFormatter(
     stampFormat: DateFormat("yyyy-MM-dd HH:mm:ss.SSS"),
   );
-  return CompositeLogger(loggers: [ConsoleLogger(logFormatter: logFormatter)]);
+  return CompositeLogger(clients: [ConsoleLogger(logFormatter: logFormatter)]);
 }

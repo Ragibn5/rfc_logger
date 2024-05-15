@@ -10,6 +10,8 @@ import '../logger_client_base.dart';
 import 'log_file_config.dart';
 
 class FileLogger extends LoggerClientBase {
+  static const ID = "file";
+
   final LogFilConfig _logFileConfig;
 
   // log queue
@@ -22,7 +24,7 @@ class FileLogger extends LoggerClientBase {
     required LogFormatter formatter,
     required LogFilConfig fileConfig,
   })  : _logFileConfig = fileConfig,
-        super(logFormatter: formatter);
+        super(clientId: ID, logFormatter: formatter);
 
   @override
   void log(LogData logData) async {
