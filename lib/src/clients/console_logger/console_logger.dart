@@ -5,6 +5,7 @@ import '../../formatters/log_formatter.dart';
 import '../logger_client_base.dart';
 
 class ConsoleLogger extends LoggerClientBase {
+  // ignore: constant_identifier_names
   static const ID = "console";
 
   ConsoleLogger({required LogFormatter logFormatter})
